@@ -25,6 +25,7 @@ import (
 )
 
 var cfgFile string
+var AteraApiKey string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -82,5 +83,7 @@ func initConfig() {
 	// If a config file is found, read it in.
 	if err := viper.ReadInConfig(); err == nil {
 		fmt.Fprintln(os.Stderr, "Using config file:", viper.ConfigFileUsed())
+		viper.AutomaticEnv()
+		AteraApiKey = viper.GetString("ATERA_API_KEY")
 	}
 }
